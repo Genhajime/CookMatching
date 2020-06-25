@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title
+      | Cookmatching
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+  .app-title.navbar.navbar-expand-md.navbar-light.bg-light
+    .navbar-brand Cookmatching
+
+    ul.navbar-nav.ml-auto
+      -if current_user.present?
+        li.nav-item= link_to 'ホーム', root_path, class: 'nav-link'
+        li.nav-item= link_to '検索一覧', search_path, class: 'nav-link'
+        li.nav-link= link_to '新規投稿', new_post_path, class: 'nav-link'
+        li.nav-link= link_to '設定', user_path(current_user), class: 'nav-link'
+  .container
+    - if flash.notice.present?
+      .alert.alert-success= flash.notice
+    = yield

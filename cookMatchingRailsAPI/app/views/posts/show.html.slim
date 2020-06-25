@@ -1,0 +1,21 @@
+h1 投稿詳細
+
+.nav.justify-content-end
+  = link_to '投稿一覧', posts_path, class: 'nav-link'
+table.table.table-hover
+  tbody
+    tr
+      th = Post.human_attribute_name(:name)
+      td = @post.name
+    tr
+      th = Post.human_attribute_name(:user_id)
+      td = User.find(@post.user_id).name
+    tr
+      th = Post.human_attribute_name(:image)
+      td = image_tag @post.image if @post.image.attached?
+    tr
+      th = Post.human_attribute_name(:description)
+      td = simple_format(h(@post.description), {}, sanitize: false, wrapper_tag: "div")
+- if current_user.id === @post.user_id     
+  = link_to '編集', edit_post_path, class: 'btn btn-primary mr-3'
+  = link_to '削除', @post, method: :delete, data: {confirm: "この投稿を削除しますか？"}, class: 'btn btn-danger'

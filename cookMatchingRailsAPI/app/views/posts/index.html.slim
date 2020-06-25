@@ -1,0 +1,14 @@
+h1 検索一覧
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th = Post.human_attribute_name(:name)
+      th = Post.human_attribute_name(:user_id)
+      th
+  tbody
+    - @posts.each do |post|
+      tr
+        td = link_to post.name, post_path(post)
+        td = User.find(post.user_id).name

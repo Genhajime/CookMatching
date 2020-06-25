@@ -1,0 +1,13 @@
+h1 ログイン
+
+.nav.justify-content-end
+  = link_to '新規登録', new_user_path, class: 'nav-link'
+
+= form_with scope: :session, local: true do |f|
+  .form-group
+    = f.label :name, 'ユーザー名'
+    = f.text_field :name, class: 'form-control', id: 'session_name'
+  .form-form-group
+    = f.label :password, 'パスワード'
+    = f.password_field :password, class: 'form-control', id: 'session_password'
+  = f.submit 'ログインする', class: 'btn btn-primary'
